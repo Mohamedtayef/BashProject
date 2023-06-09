@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Ask for username
+username=$(whiptail --inputbox "Enter username" 8 78 --title "Modify User Group ID" 3>&1 1>&2 2>&3)
+
+# Ask for group ID
+group_id=$(whiptail --inputbox "Enter group ID" 8 78 --title "Modify User Group ID" 3>&1 1>&2 2>&3)
+
+# Check if the user exists
+if id "$username" >/dev/null 2>&1; then
+    # Modify the group ID of the user
+    usermod -g "$group_id" "$username"
+    whiptail --title "Modify User Group ID" --msgbox "Group ID modified successfully" 8 78
+else
+    whiptail --title "Modify User Group ID" --msgbox "User does not exist" 8 78
+fi
